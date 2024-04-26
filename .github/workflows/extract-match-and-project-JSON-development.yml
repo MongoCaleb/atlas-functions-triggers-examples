@@ -20,5 +20,5 @@ jobs:
             file_path=$(dirname "${i}")
             file_name=$(basename "${i}")
             cd file_path
-            cat ./triggers/match_update.json | jq '.config.match'
+            cat file_name | jq '.config.match'
           done
