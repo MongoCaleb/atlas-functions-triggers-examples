@@ -19,6 +19,6 @@ jobs:
         run: |
           IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
           for i in "${myarray[@]}"; do
-            file_name="${i}"
-            cat file_name | jq '.config.match'
+            echo "${i}"
+            : # cat file_name | jq '.config.match'
           done
