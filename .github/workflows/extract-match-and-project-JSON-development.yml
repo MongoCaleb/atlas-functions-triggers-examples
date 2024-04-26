@@ -12,14 +12,14 @@ jobs:
       - name: Finding JSON files and store to output
         id: finding-files
         run: |
-          : # cd snippets/trigger-expressions
-          echo "::set-output name=FILELIST::$(find *.json)"
+          cd snippets/trigger-expressions
+          echo "::set-output name=FILELIST::$(ls *.json)"
       - name: Iterate files and parse them
         working-directory: snippets/trigger-expressions
         run: |
-          : # ls *.json
-          : # IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-          for i in ${{ steps.finding-files.outputs.FILELIST }}; do
+          : # ls
+          IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
+          for i in "${myarray[@]}"; do
             echo "${i}"
             cat "${i}" | jq '.config.match'
           done
