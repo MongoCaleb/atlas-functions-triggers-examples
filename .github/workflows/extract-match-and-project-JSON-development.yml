@@ -17,9 +17,9 @@ jobs:
       - name: Iterate files and parse them
         working-directory: snippets/trigger-expressions
         run: |
-          ls *.json
+          : # ls *.json
           : # IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-          for i in "$(ls *.json)"; do
+          for i in "$(find *.json)"; do
             echo "${i}"
             cat "${i}" | jq '.config.match'
           done
