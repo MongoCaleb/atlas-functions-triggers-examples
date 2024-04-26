@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: mongocaleb/jq-action@v2.3.0
+      - uses: actions/checkout
       - name: Finding JSON files and store to output
         id: finding-files
         run: |
