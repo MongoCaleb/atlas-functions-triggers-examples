@@ -7,7 +7,7 @@ jobs:
   extract-json:
     runs-on: ubuntu-latest
     steps:
-      - uses: mongocaleb/jq-action@v2
+      - uses: mongocaleb/jq-action@v2.3.0
       - name: Finding JSON files and store to output
         id: finding-files
         run: |
