@@ -13,7 +13,7 @@ jobs:
         id: finding-files
         run: |
           cd snippets/trigger-expressions
-          echo "::set-output name=FILELIST::$(find . -name '*.json' -print)"
+          echo "::set-output name=FILELIST::$(ls *.json)"
       - name: Iterate files and parse them
         working-directory: snippets/trigger-expressions
         run: |
