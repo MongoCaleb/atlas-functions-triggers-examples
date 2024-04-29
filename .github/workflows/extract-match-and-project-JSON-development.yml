@@ -15,7 +15,13 @@ jobs:
           : # cd snippets/trigger-expressions
           : # echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
           echo "action_state=yellow" >> "$GITHUB_ENV"
-          echo "FILELIST=$(("ls -1 snippets/trigger-expressions/*.json"))" >> "$GITHUB_ENV"
+          : # echo "FILELIST=$((ls -1 snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
+
+          {
+            echo 'FILELIST<<EOF'
+            find snippets/trigger-expressions/*.json -print
+            echo EOF
+          } >> "$GITHUB_ENV"
 
           : # echo "FILELIST=$(files=(snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
 
@@ -27,8 +33,9 @@ jobs:
         run: |
           : # printf '%s\n' "$action_state" # This will output 'yellow'
           printf '%s\n' "$FILELIST" # This will output all files...
-          : # readarray -t my_array <<< $FILELIST
-          : # printf "$my_array"
+          readarray -t files <<< $FILELIST
+          printf "$files"
+
           for filename in "${files[@]}"; do
             echo "$filename"
           done
