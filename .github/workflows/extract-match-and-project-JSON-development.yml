@@ -13,12 +13,14 @@ jobs:
         id: finding-files
         run: |
           : # cd snippets/trigger-expressions
-          echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
+          : # echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
+          run: echo "{FILELIST}={$find snippets/trigger-expressions/*.json}" >> $GITHUB_OUTPUT
+
       - name: Iterate files and parse them
         run: |
           : # ls
-          IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-          for i in "${{ steps.finding-files.outputs.FILELIST }}"; do
+          IFS="," read -a myarray <<< ${ GITHUB_OUTPUT }
+          for i in "${ GITHUB_OUTPUT }"; do
             echo "${i}"
             cat "${i}" | jq '.config.match'
           done
