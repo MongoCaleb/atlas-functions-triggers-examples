@@ -26,10 +26,10 @@ jobs:
 
       - name: Iterate files and parse them
         run: |
-          printf '%s\n' "$action_state" # This will output 'yellow'
-          printf '%s\n' "$FILELIST" # This will output all files...
-
-          for i in "$FILELIST"; do
+          : # printf '%s\n' "$action_state" # This will output 'yellow'
+          : # printf '%s\n' "$FILELIST" # This will output all files...
+          IFS="," read -a myarray <<< $FILELIST
+          
+          for i in "${myarray[@]}"; do
             printf "$i"
-            cat "${i}" | jq '.config.match'
           done
