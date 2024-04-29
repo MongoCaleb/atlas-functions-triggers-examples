@@ -21,13 +21,14 @@ jobs:
             echo FOO
           } >> "$GITHUB_OUTPUT"
 
-          echo $FILELIST
-          echo $GITHUB_OUTPUT
+          echo "{$FILELIST}""
+          echo {$GITHUB_OUTPUT}
       - name: Iterate files and parse them
         run: |
           IFS="FOO" read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-          echo $FILELIST
-            for i in "${myarray[@]}"; do
-              echo "Value: ${i}"
-              echo "Value: ${i%.*}"
-            done
+          echo ${myarray}
+          echo "${myarray}"
+          for i in "${myarray[@]}"; do
+            echo "Value: ${i}"
+            echo "Value: ${i%.*}"
+          done
