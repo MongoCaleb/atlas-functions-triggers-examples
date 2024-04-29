@@ -17,7 +17,7 @@ jobs:
           echo "action_state=yellow" >> "$GITHUB_ENV"
           : # echo "FILELIST=$(ls -1 snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
 
-          echo "FILELIST=($(snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
+          echo "FILELIST=(snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
 
           : # echo ${array[1]}
           : # echo "FILELIST=${array[1]}  >> "$GITHUB_ENV"
@@ -25,7 +25,7 @@ jobs:
 
       - name: Iterate files and parse them
         run: |
-          printf '%s\n' "$action_state" # This will output 'yellow'
+          : # printf '%s\n' "$action_state" # This will output 'yellow'
           printf '%s\n' "$FILELIST" # This will output all files...
           : # readarray -t my_array <<< $FILELIST
           : # printf "$my_array"
