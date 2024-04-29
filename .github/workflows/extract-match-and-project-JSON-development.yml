@@ -28,7 +28,8 @@ jobs:
         run: |
           printf '%s\n' "$action_state" # This will output 'yellow'
           printf '%s\n' "$FILELIST" # This will output all files...
-          
+
           for i in "$FILELIST"; do
             printf "$i"
+            cat "${i}" | jq '.config.match'
           done
