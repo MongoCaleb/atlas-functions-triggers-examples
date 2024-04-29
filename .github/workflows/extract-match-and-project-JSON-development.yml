@@ -14,15 +14,21 @@ jobs:
         run: |
           : # cd snippets/trigger-expressions
           : # echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
-          echo "{FILELIST}={$git ls-files snippets/trigger-expressions/*.json}" >> $GITHUB_OUTPUT
-
+          echo "{FILELIST}={$ls snippets/trigger-expressions/*.json}" >> $GITHUB_OUTPUT
           echo $FILELIST
+
+
+          {
+            echo 'output_name<<FOO'
+            echo $ls snippets/trigger-expressions/*.json
+            echo
+            echo FOO
+          } >> "$GITHUB_OUTPUT"
       - name: Iterate files and parse them
         run: |
-          : # ls
-          IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-          for i in ${{ steps.finding-files.outputs.FILELIST }}; do
-            echo "${i}"
-            cat "${i}" | jq '.config.match'
-          done
-      
+
+          IFS="FOO" read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
+            for i in "${myarray[@]}"; do
+              echo "Value: ${i}"
+              echo "Value: ${i%.*}"
+            done
