@@ -28,8 +28,8 @@ jobs:
         run: |
           : # printf '%s\n' "$action_state" # This will output 'yellow'
           : # printf '%s\n' "$FILELIST" # This will output all files...
-          IFS="," read -a myarray <<< $FILELIST
+          readarray -t my_array <<< $FILELIST
           
-          for i in "${myarray[@]}"; do
+          for i in "${my_array}"; do
             printf "$i"
           done
