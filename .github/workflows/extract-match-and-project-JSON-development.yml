@@ -12,16 +12,18 @@ jobs:
       - name: Finding JSON files and store to output
         id: finding-files
         run: |
-          echo "::set-output name=FILELIST::$(find . -name snippets/trigger-expressions/*.json -print)"
-          echo "{$FILELIST}"
-          echo "{$GITHUB_OUTPUT}"
+          : # cd snippets/trigger-expressions
+          : # echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
+          echo "action_state=yellow" >> "$GITHUB_ENV"
+          echo "FILELIST=$(find snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
       - name: Iterate files and parse them
         run: |
-          echo ${{ steps.finding-files.outputs.FILELIST }}
-          IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
-          echo ${myarray}
-          echo "${myarray}"
-          for i in "${myarray[@]}"; do
-            echo "Value: ${i}"
-            echo "Value: ${i%.*}"
+          printf '%s\n' "$action_state" # This will output 'yellow'
+          printf '%s\n' "$FILELIST" # This will output 'yellow'
+          
+          : # IFS="FOO" read -a myarray <<< "${{ steps.finding-files.outputs.FILELIST }}"
+          : # echo ${myarray}
+          : # echo "${myarray}"
+          for i in "$FILELIST"; do
+          printf i
           done
