@@ -25,7 +25,8 @@ jobs:
           echo "{$GITHUB_OUTPUT}"
       - name: Iterate files and parse them
         run: |
-          IFS="FOO" read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
+          echo "${{ steps.finding-files.outputs.FILELIST }}"
+          IFS="FOO" read -a myarray <<< "${{ steps.finding-files.outputs.FILELIST }}"
           echo ${myarray}
           echo "${myarray}"
           for i in "${myarray[@]}"; do
