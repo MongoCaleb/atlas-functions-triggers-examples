@@ -19,7 +19,7 @@ jobs:
 
           {
             echo 'FILELIST<<EOF'
-            find snippets/trigger-expressions/*.json -print
+            ls -1 snippets/trigger-expressions/*.json
             echo EOF
           } >> "$GITHUB_ENV"
 
