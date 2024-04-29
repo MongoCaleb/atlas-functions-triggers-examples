@@ -16,14 +16,23 @@ jobs:
           : # echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
           echo "action_state=yellow" >> "$GITHUB_ENV"
           : # echo "FILELIST=$(find snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
-          echo "FILELIST=$(array=($find snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
-          
+
+          {
+            echo 'FILELIST<<EOF'
+            find snippets/trigger-expressions/*.json -print
+            echo EOF
+          } >> "$GITHUB_ENV"
+
 
       - name: Iterate files and parse them
         run: |
-          : # printf '%s\n' "$action_state" # This will output 'yellow'
+          printf '%s\n' "$action_state" # This will output 'yellow'
           printf '%s\n' "$FILELIST" # This will output all files...
 
+          for x in "${ $FILELIST }"; do
+            echo "$x"
+          done
+
           for i in "$FILELIST"; do
-            echo "${i}""
+            printf "$i"
           done
