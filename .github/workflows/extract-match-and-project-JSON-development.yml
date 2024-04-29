@@ -15,7 +15,7 @@ jobs:
           : # cd snippets/trigger-expressions
           : # echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
           echo "action_state=yellow" >> "$GITHUB_ENV"
-          echo "FILELIST=$(ls -1 snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
+          echo "FILELIST=$((ls -1 snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
 
           : # echo "FILELIST=$(files=(snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
 
