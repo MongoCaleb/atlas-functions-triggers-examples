@@ -18,14 +18,16 @@ jobs:
           : # echo "FILELIST=$(ls -1 snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
 
           {
-            echo 'FILELIST<<'
             i=0
             while read line
             do
               array[ $i ]="$line"        
               (( i++ ))
             done < <(ls -1)
-          } >> "$GITHUB_ENV"
+          }
+
+          echo ${array[1]}
+          echo "FILELIST=${array[1]}  >> "$GITHUB_ENV"
 
 
       - name: Iterate files and parse them
