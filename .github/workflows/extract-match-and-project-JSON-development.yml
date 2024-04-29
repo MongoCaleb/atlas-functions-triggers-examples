@@ -17,14 +17,10 @@ jobs:
           : # echo "action_state=yellow" >> "$GITHUB_ENV"
           : # echo "FILELIST=$(ls -1 snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
 
-          echo {
-            i=0
-            while read line
-            do
-              array[ $i ]="$line"        
-              (( i++ ))
-            done < <(ls -1)
-          }
+
+          echo "FILELIST=$(snippets/trigger-expressions/*.json)" >> "$GITHUB_ENV"
+
+         
 
           : # echo ${array[1]}
           : # echo "FILELIST=${array[1]}  >> "$GITHUB_ENV"
@@ -34,8 +30,8 @@ jobs:
         run: |
           : # printf '%s\n' "$action_state" # This will output 'yellow'
           printf '%s\n' "$FILELIST" # This will output all files...
-          readarray -t my_array <<< $FILELIST
-          printf "$my_array"
-          for i in "${my_array}"; do
-            printf "$i"
+          : # readarray -t my_array <<< $FILELIST
+          : # printf "$my_array"
+          for filename in "${files[@]}"; do
+            echo "$filename"
           done
