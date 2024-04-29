@@ -14,15 +14,8 @@ jobs:
         run: |
           : # cd snippets/trigger-expressions
           : # echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
-          : # echo "{FILELIST}={$ls snippets/trigger-expressions/*.json}" >> $GITHUB_OUTPUT
-          : # echo $FILELIST
+          echo "{FILELIST}={$git ls-files snippets/trigger-expressions/*.json}" >> $GITHUB_OUTPUT
 
-
-          {
-            echo 'FILELIST<<,'
-            echo $find snippets/trigger-expressions/*.json
-            echo ,
-          } >> "$GITHUB_OUTPUT"
           echo $FILELIST
       - name: Iterate files and parse them
         run: |
