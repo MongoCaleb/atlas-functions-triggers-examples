@@ -19,9 +19,9 @@ jobs:
 
 
           {
-            echo 'FILELIST<<\n'
+            echo 'FILELIST<<,'
             echo $find snippets/trigger-expressions/*.json
-            echo \n
+            echo ,
           } >> "$GITHUB_OUTPUT"
           echo $FILELIST
       - name: Iterate files and parse them
