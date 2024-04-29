@@ -19,8 +19,8 @@ jobs:
       - name: Iterate files and parse them
         run: |
           : # ls
-          IFS="," read -a myarray <<< ${ GITHUB_OUTPUT }
-          for i in "${ GITHUB_OUTPUT }"; do
+          IFS="," read -a myarray <<< ${{ steps.finding-files.outputs }}
+          for i in ${{ steps.finding-files.outputs }}; do
             echo "${i}"
             cat "${i}" | jq '.config.match'
           done
