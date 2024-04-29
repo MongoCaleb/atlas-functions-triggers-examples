@@ -28,11 +28,7 @@ jobs:
         run: |
           printf '%s\n' "$action_state" # This will output 'yellow'
           printf '%s\n' "$FILELIST" # This will output all files...
-
-          for x in "${ $FILELIST }"; do
-            echo "$x"
-          done
-
+          
           for i in "$FILELIST"; do
             printf "$i"
           done
