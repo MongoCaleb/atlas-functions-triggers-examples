@@ -12,7 +12,7 @@ jobs:
       - name: Finding JSON files and store to output
         id: finding-files
         run: |
-          echo "::set-output name=FILELIST::$(find . -name 'snippets/trigger-expressions/*.json' -print)"
+          echo "::set-output name=FILELIST::$(find . -name snippets/trigger-expressions/*.json -print)"
           echo "{$FILELIST}"
           echo "{$GITHUB_OUTPUT}"
       - name: Iterate files and parse them
