@@ -15,9 +15,9 @@ jobs:
           : # cd snippets/trigger-expressions
           echo "::set-output name=FILELIST::$(find snippets/trigger-expressions/*.json)"
       - name: Iterate files and parse them
-        working-directory: snippets/trigger-expressions
+        : # working-directory: snippets/trigger-expressions
         run: |
-          ls
+          : # ls
           IFS="," read -a myarray <<< ${{ steps.finding-files.outputs.FILELIST }}
           for i in "${{ steps.finding-files.outputs.FILELIST }}"; do
             echo "${i}"
