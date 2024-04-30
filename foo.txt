@@ -1,2 +1,0 @@
-snippets/trigger-expressions/trigger-match.update.json
-snippets/trigger-expressions/trigger-project.update.json
