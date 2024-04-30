@@ -32,9 +32,9 @@ jobs:
       - name: Iterate files and parse them
         run: |
           printf '%s\n' "$action_state" # This will output 'yellow'
-          printf '%s\n' "$FILELIST" # This will output all files...
-          : # readarray -t files <<< $FILELIST
+          : # printf '%s\n' "$FILELIST" # This will output all files...
+          readarray -t files <<< $(ls -ls)
           : # printf "$files"
-          while read $FILELIST;
-            do IFS='cht123' echo $filename; 
+          while read $files;
+            do echo $filename; 
           done
