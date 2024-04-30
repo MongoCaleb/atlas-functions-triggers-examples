@@ -33,8 +33,14 @@ jobs:
         run: |
           printf '%s\n' "$action_state" # This will output 'yellow'
           : # printf '%s\n' "$FILELIST" # This will output all files...
-          readarray -t files <<< $(ls -ls)
+          readarray -t files <<< $(ls -1)
           : # printf "$files"
-          while read $files;
-            do echo $filename; 
-          done
+          for (( i=1; i<${#files[@]}; i++ ))
+          {
+              # Convert current line to an array
+              line=(${files[$i]})
+              # Get the filename, joining it together any spaces
+              fileName=${line[@]:9}
+              echo $fileName
+          }
+
