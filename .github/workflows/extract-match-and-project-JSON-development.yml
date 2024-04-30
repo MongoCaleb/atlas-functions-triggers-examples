@@ -33,4 +33,5 @@ jobs:
         run: |
           for fileName in $(ls -1 snippets/trigger-expressions/*.json); do
               echo $fileName
+              cat "${i}" | jq '.config.match'
           done
