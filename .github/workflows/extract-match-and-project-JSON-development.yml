@@ -18,9 +18,9 @@ jobs:
           : # echo "FILELIST=$((ls -1 snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
 
           {
-            echo 'FILELIST<<EOF'
+            echo 'FILELIST<<cht123'
             ls -1 snippets/trigger-expressions/*.json
-            echo EOF
+            echo cht123
           } >> "$GITHUB_ENV"
 
           : # echo "FILELIST=$(files=(snippets/trigger-expressions/*.json))" >> "$GITHUB_ENV"
@@ -35,7 +35,6 @@ jobs:
           printf '%s\n' "$FILELIST" # This will output all files...
           readarray -t files <<< $FILELIST
           printf "$files"
-
-          for filename in "${files[@]}"; do
-            echo "$filename"
+          while read line;
+            do IFS='cht123' echo $filename; 
           done
